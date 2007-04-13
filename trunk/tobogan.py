@@ -48,7 +48,7 @@ class MainWindow(QtGui.QMainWindow):
         
     def saveFile(self):
     
-        data=''
+        self.data=''
     
         t=[]
         tit=str(self.ui.pres_title.text())
@@ -126,6 +126,7 @@ class MainWindow(QtGui.QMainWindow):
         fn=str(QtGui.QFileDialog.getOpenFileName (self))
         if not fn:
             return
+        self.fn=fn
         self.data=codecs.open(fn,"r","utf-8").read()
         self.tree=docutils.core.publish_doctree(self.data)
         

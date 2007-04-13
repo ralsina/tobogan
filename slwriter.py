@@ -208,9 +208,9 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
 
     def depart_footer(self, node):
         start = self.context.pop()
-        self.sl_footer.append('<h2>')
+        self.sl_footer.append('<div id="footer">')
         self.sl_footer.extend(self.body[start:])
-        self.sl_footer.append('</h2>')
+        self.sl_footer.append('</div>')
         del self.body[start:]
 
     def depart_header(self, node):

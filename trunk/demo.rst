@@ -1,6 +1,10 @@
 Why use BartleBlog
 ==================
 
+.. header:: This space for rent.
+
+.. footer:: This space too
+
 (If you are a nerd)
 ~~~~~~~~~~~~~~~~~~~
 

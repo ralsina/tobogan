@@ -68,7 +68,7 @@ class MainWindow(QtGui.QMainWindow):
         for slide in self.slides:
             data=data+'\n'+self.slideToText(slide)
             
-        codecs.open('salida','w','utf-8').write(data)
+        codecs.open(self.fn,'w','utf-8').write(data)
         
     def slideToText(self,slide):
         t=[]

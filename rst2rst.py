@@ -26,7 +26,6 @@ def gen_rst(node, depth, in_line_block=False):
         except:
             pass
                 
-        
         if isinstance (node, docutils.nodes.document):
                 node.rst=gather_rst(node,depth)
 

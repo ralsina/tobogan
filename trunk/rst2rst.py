@@ -4,7 +4,7 @@
 import docutils.core,docutils.nodes,sys,re
 from urlparse import urlparse
 
-
+import sourcecode
 
 marks="#=-_*^>%&|"
 lowerroman=['i','ii','iii','iv','v','vi','vii','viii','ix','x','xi']
@@ -18,6 +18,15 @@ def gen_rst(node, depth, in_line_block=False):
         #                print node.__class__,"::",node.parent.__class__,"::",node.parent.parent.__class__, "::::::::", node,"\n\n"
         #        except:
         #               pass
+        
+        # Some custom directives save theor source code
+        
+        try:
+            return node.in_rst
+        except:
+            pass
+                
+        
         if isinstance (node, docutils.nodes.document):
                 node.rst=gather_rst(node,depth)
 
@@ -734,52 +743,21 @@ from docutils.transforms import Transformer
 import docutils.readers.doctree
 
 
-class PPublisher( docutils.core.Publisher):
-    def apply_transforms(self):
-        self.document.transformer.populate_from_components(
-            (self.source, self.reader, self.reader.parser, self.writer,
-             self.destination))
-        self.document.transformer.transforms=self.document.transformer.transforms[1:]
-        #print self.document.transformer.transforms
-        self.document.transformer.apply_transforms()
+##class PPublisher( docutils.core.Publisher):
+##    def apply_transforms(self):
+##        self.document.transformer.populate_from_components(
+##            (self.source, self.reader, self.reader.parser, self.writer,
+##             self.destination))
+##        self.document.transformer.transforms=self.document.transformer.transforms[1:]
+##        #print self.document.transformer.transforms
+##        self.document.transformer.apply_transforms()
 
-def publish_doctree(source, source_path=None,
-                    source_class=io.StringInput,
-                    reader=None, reader_name='standalone',
-                    parser=None, parser_name='restructuredtext',
-                    settings=None, settings_spec=None,
-                    settings_overrides=None, config_section=None,
-                    enable_exit_status=None):
-    """
-    Set up & run a `Publisher` for programmatic use with string I/O.
-    Return the document tree.
-
-    For encoded string input, be sure to set the 'input_encoding' setting to
-    the desired encoding.  Set it to 'unicode' for unencoded Unicode string
-    input.  Here's one way::
-
-        publish_doctree(..., settings_overrides={'input_encoding': 'unicode'})
-
-    Parameters: see `publish_programmatically`.
-    """
-
-    pub = PPublisher(reader=reader, parser=parser, writer=None,
-                    settings=settings,
-                    source_class=source_class,
-                    destination_class=io.NullOutput)
-    pub.set_components(reader_name, parser_name, 'null')
-    pub.process_programmatic_settings(
-        settings_spec, settings_overrides, config_section)
-    pub.set_source(source, source_path)
-    pub.set_destination(None, None)
-    output = pub.publish(enable_exit_status=enable_exit_status)
-    return pub.document
-
+decoration = u""
 
 if __name__ == "__main__":
     input=open(sys.argv[1]).read()
-    doc=publish_doctree(input)
-    decoration = u""
+    import docutils.core
+    doc=docutils.core.publish_doctree(input)
     print (gen_rst(doc,0)+decoration).encode("utf-8")
 
 

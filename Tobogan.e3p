@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.9.dtd">
 <!-- Project file for project Tobogan -->
-<!-- Saved: 2007-04-13, 10:37:48 -->
+<!-- Saved: 2007-04-13, 19:23:59 -->
 <!-- Copyright (C) 2007 Roberto Alsina, ralsina@kde.org -->
 <Project version="3.9">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -16,6 +16,18 @@
     </Source>
     <Source>
       <Name>slwriter.py</Name>
+    </Source>
+    <Source>
+      <Name>Ui_mainwindow.py</Name>
+    </Source>
+    <Source>
+      <Name>tobogan.py</Name>
+    </Source>
+    <Source>
+      <Name>sourcecode.py</Name>
+    </Source>
+    <Source>
+      <Name>rst2rst.py</Name>
     </Source>
   </Sources>
   <Forms>

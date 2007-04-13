@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/mnt/centos/home/ralsina/Desktop/proyectos/tobogan/tobogan/mainwindow.ui'
 #
-# Created: Fri Apr 13 15:16:40 2007
+# Created: Fri Apr 13 19:19:33 2007
 #      by: PyQt4 UI code generator 4.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -116,6 +116,8 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.slide_list.sizePolicy().hasHeightForWidth())
         self.slide_list.setSizePolicy(sizePolicy)
+        self.slide_list.setAutoFillBackground(False)
+        self.slide_list.setUniformItemSizes(True)
         self.slide_list.setObjectName("slide_list")
 
         self.layoutWidget = QtGui.QWidget(self.splitter)
@@ -256,6 +258,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menu_File.menuAction())
         self.menubar.addAction(self.menu_Edit.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
+        self.toolBar.addAction(self.action_Open)
         self.toolBar.addAction(self.actionNew)
         self.toolBar.addAction(self.action_Save)
         self.toolBar.addSeparator()

@@ -776,10 +776,10 @@ def publish_doctree(source, source_path=None,
     return pub.document
 
 
-
-input=open(sys.argv[1]).read()
-doc=publish_doctree(input)
-decoration = u""
-print (gen_rst(doc,0)+decoration).encode("utf-8")
+if __name__ == "__main__":
+    input=open(sys.argv[1]).read()
+    doc=publish_doctree(input)
+    decoration = u""
+    print (gen_rst(doc,0)+decoration).encode("utf-8")
 
 

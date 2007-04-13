@@ -21,24 +21,17 @@
      <number>6</number>
     </property>
     <item>
-     <widget class="QSplitter" name="splitter" >
-      <property name="orientation" >
-       <enum>Qt::Horizontal</enum>
+     <widget class="QTabWidget" name="tabWidget" >
+      <property name="currentIndex" >
+       <number>1</number>
       </property>
-      <widget class="QListWidget" name="slides" >
-       <property name="sizePolicy" >
-        <sizepolicy>
-         <hsizetype>1</hsizetype>
-         <vsizetype>7</vsizetype>
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
-      <widget class="QWidget" name="" >
+      <widget class="QWidget" name="presentation" >
+       <attribute name="title" >
+        <string>Presentation</string>
+       </attribute>
        <layout class="QVBoxLayout" >
         <property name="margin" >
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="spacing" >
          <number>6</number>
@@ -52,19 +45,155 @@
            <number>6</number>
           </property>
           <item>
-           <widget class="QLabel" name="label" >
-            <property name="text" >
-             <string>Slide Title:</string>
+           <layout class="QVBoxLayout" >
+            <property name="margin" >
+             <number>0</number>
             </property>
-           </widget>
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="label_2" >
+              <property name="text" >
+               <string>Presentation Title:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_3" >
+              <property name="text" >
+               <string>Presentation Subtitle:</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
-           <widget class="QLineEdit" name="title" />
+           <layout class="QVBoxLayout" >
+            <property name="margin" >
+             <number>0</number>
+            </property>
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <item>
+             <widget class="QLineEdit" name="pres_title" />
+            </item>
+            <item>
+             <widget class="QLineEdit" name="pres_subtitle" />
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QTextEdit" name="text" />
+         <layout class="QVBoxLayout" >
+          <property name="margin" >
+           <number>0</number>
+          </property>
+          <property name="spacing" >
+           <number>6</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_4" >
+            <property name="text" >
+             <string>Header:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="pres_header" />
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" >
+          <property name="margin" >
+           <number>0</number>
+          </property>
+          <property name="spacing" >
+           <number>6</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_5" >
+            <property name="text" >
+             <string>Footer:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="pres_footer" />
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="slides" >
+       <attribute name="title" >
+        <string>Slides</string>
+       </attribute>
+       <layout class="QHBoxLayout" >
+        <property name="margin" >
+         <number>9</number>
+        </property>
+        <property name="spacing" >
+         <number>6</number>
+        </property>
+        <item>
+         <widget class="QSplitter" name="splitter" >
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <widget class="QListWidget" name="slide_list" >
+           <property name="sizePolicy" >
+            <sizepolicy>
+             <hsizetype>1</hsizetype>
+             <vsizetype>7</vsizetype>
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+          <widget class="QWidget" name="layoutWidget" >
+           <layout class="QVBoxLayout" >
+            <property name="margin" >
+             <number>0</number>
+            </property>
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <item>
+             <layout class="QHBoxLayout" >
+              <property name="margin" >
+               <number>0</number>
+              </property>
+              <property name="spacing" >
+               <number>6</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label" >
+                <property name="text" >
+                 <string>Slide Title:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="slide_title" />
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QTextEdit" name="slide_text" >
+              <property name="font" >
+               <font>
+                <family>Bitstream Vera Sans Mono</family>
+               </font>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -96,6 +225,13 @@
     <addaction name="separator" />
     <addaction name="action_Quit" />
    </widget>
+   <widget class="QMenu" name="menuHelp" >
+    <property name="title" >
+     <string>Help</string>
+    </property>
+    <addaction name="action_Contents" />
+    <addaction name="actionAbout_Tobogan" />
+   </widget>
    <widget class="QMenu" name="menu_Edit" >
     <property name="title" >
      <string>&amp;Edit</string>
@@ -108,13 +244,6 @@
     <addaction name="actionPaste" />
     <addaction name="actionDelete" />
     <addaction name="actionSelect_All" />
-   </widget>
-   <widget class="QMenu" name="menuHelp" >
-    <property name="title" >
-     <string>Help</string>
-    </property>
-    <addaction name="action_Contents" />
-    <addaction name="actionAbout_Tobogan" />
    </widget>
    <addaction name="menu_File" />
    <addaction name="menu_Edit" />
@@ -145,6 +274,9 @@
    </property>
    <property name="text" >
     <string>&amp;Open</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+O</string>
    </property>
   </action>
   <action name="action_Save" >

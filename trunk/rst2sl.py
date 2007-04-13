@@ -11,7 +11,7 @@ A minimal front end to the Docutils Publisher, producing HTML slides using
 the S5 template system.
 """
 
-import BartleBlog.rst
+import sourcecode 
 
 try:
     import locale

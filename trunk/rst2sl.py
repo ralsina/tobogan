@@ -25,4 +25,4 @@ from docutils.core import publish_cmdline, default_description
 description = ('Generates slideshow documents from standalone '
                'reStructuredText sources.  ' + default_description)
 
-publish_cmdline(writer_name='sl', description=description)
+publish_cmdline(writer_name='slwriter', description=description)

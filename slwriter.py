@@ -201,9 +201,9 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
 
     def depart_footer(self, node):
         start = self.context.pop()
-        self.s5_footer.append('<h2>')
-        self.s5_footer.extend(self.body[start:])
-        self.s5_footer.append('</h2>')
+        self.sl_footer.append('<h2>')
+        self.sl_footer.extend(self.body[start:])
+        self.sl_footer.append('</h2>')
         del self.body[start:]
 
     def depart_header(self, node):
@@ -212,7 +212,7 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
         header.extend(self.body[start:])
         header.append('\n</div>\n')
         del self.body[start:]
-        self.s5_header.extend(header)
+        self.sl_header.extend(header)
 
     def visit_subtitle(self, node):
         if isinstance(node.parent, nodes.section):

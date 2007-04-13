@@ -26,6 +26,9 @@ feature I deem cool.
 It does things simply
 ---------------------
 
+This is a subtitle?
++++++++++++++++++++
+
 Wanna show a flickr photo?
 
 .. code-block:: rst
@@ -61,9 +64,3 @@ code, but the hard part is done!
 Or automatic SVN changelog display ( I admit that's *somewhat niche* ;-))
 
 Now, who else has that kind of thing?
-
-A final page
-------------
-
-Just to see
-

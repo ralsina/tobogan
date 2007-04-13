@@ -87,7 +87,7 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
             var eff1=$(slides[current]).effects({
                     duration: delay
             });
-    	    eff1.start({'top': [ph] }
+        eff1.start({'top': [ph] }
                 );
         }
     }
@@ -98,20 +98,19 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
             var eff1=$(slides[current]).effects({
                     duration: delay
             });
-    	    eff1.start({'top': [topMargin] }
-                );
+        eff1.start({'top': [topMargin] });
         }
     }
 
     function next() {
         slide_out();
-	current=current+1;
+    current=current+1;
         slide_in();
     };
 
     function prev() {
         slide_out();
-	current=current-1;
+    current=current-1;
         slide_in();
     }
 
@@ -182,8 +181,6 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
                               + self.docinfo + self.body
                               + self.body_suffix[:-1])
 
-
-
     def visit_section(self, node):
         if not self.section_count:
             self.body.append('\n</div>\n')
@@ -197,6 +194,36 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
 
 
     def depart_section(self, node):
-        self.sections.append(node['ids'][0])
+        if self.section_level <= 1:
+            self.sections.append(node['ids'][0])
         html4css1.HTMLTranslator.depart_section(self,node)
 
+
+    def depart_footer(self, node):
+        start = self.context.pop()
+        self.s5_footer.append('<h2>')
+        self.s5_footer.extend(self.body[start:])
+        self.s5_footer.append('</h2>')
+        del self.body[start:]
+
+    def depart_header(self, node):
+        start = self.context.pop()
+        header = ['<div id="header">\n']
+        header.extend(self.body[start:])
+        header.append('\n</div>\n')
+        del self.body[start:]
+        self.s5_header.extend(header)
+
+    def visit_subtitle(self, node):
+        if isinstance(node.parent, nodes.section):
+            level = self.section_level + self.initial_header_level - 1
+            if level == 1:
+                level = 2
+            tag = 'h%s' % level
+            self.body.append(self.starttag(node, tag, ''))
+            self.context.append('</%s>\n' % tag)
+        else:
+            html4css1.HTMLTranslator.visit_subtitle(self, node)
+
+    def visit_title(self, node, move_ids=0):
+        html4css1.HTMLTranslator.visit_title(self, node, move_ids=move_ids)

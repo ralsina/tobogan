@@ -1,6 +1,7 @@
 # Author: Roberto Alsina
 # Contact: ralsina@kde.org
 # Copyright: This module has been placed in the public domain
+# Largely based on the S5 writer by Chris Liechti and David Goodger
 
 """
 Mootools fancy HTML/Javascript slide writer
@@ -103,15 +104,21 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
     }
 
     function next() {
-        slide_out();
-    current=current+1;
-        slide_in();
+        if (current < numPages-2)
+        {
+            slide_out();
+            current=current+1;
+            slide_in();
+        }
     };
 
     function prev() {
-        slide_out();
-    current=current-1;
-        slide_in();
+        if ( current > 0)
+        {
+            slide_out();
+            current=current-1;
+            slide_in();
+        }
     }
 
 

@@ -33,6 +33,10 @@ class MainWindow(QtGui.QMainWindow):
         QtCore.QObject.connect(self.ui.action_Open,
             QtCore.SIGNAL("triggered()"),
             self.openFile)
+
+        QtCore.QObject.connect(self.ui.action_Save,
+            QtCore.SIGNAL("triggered()"),
+            self.saveFile)
         QtCore.QObject.connect(self.ui.slide_list,
             QtCore.SIGNAL("currentRowChanged(int)"),
             self.openSlide)
@@ -41,6 +45,39 @@ class MainWindow(QtGui.QMainWindow):
         self.tree=None
         self.nodes={}
         self.slides=[]
+        
+    def saveFile(self):
+    
+        data=''
+    
+        t=[]
+        tit=str(self.ui.pres_title.text())
+        t.append('='*len(tit))
+        t.append(tit)
+        t.append('='*len(tit))
+        t.append('')
+        
+        tit=str(self.ui.pres_subtitle.text())
+        t.append('-'*len(tit))
+        t.append(tit)
+        t.append('-'*len(tit))
+        t.append('')
+        
+        data=data+'\n'.join(t)
+    
+        for slide in self.slides:
+            data=data+'\n'+self.slideToText(slide)
+            
+        codecs.open('salida','w','utf-8').write(data)
+        
+    def slideToText(self,slide):
+        t=[]
+        t.append(slide[0])
+        t.append('-'*len(slide[0]))
+        t.append('')
+        t.append('')
+        return '\n'.join(t)+slide[1]
+        
         
     def openSlide(self,n):
         self.ui.slide_title.setText(self.slides[n][0])

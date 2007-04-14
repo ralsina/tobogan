@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/mnt/centos/home/ralsina/Desktop/proyectos/tobogan/tobogan/mainwindow.ui'
 #
-# Created: Fri Apr 13 19:19:33 2007
+# Created: Sat Apr 14 19:00:51 2007
 #      by: PyQt4 UI code generator 4.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -100,10 +100,10 @@ class Ui_MainWindow(object):
         self.slides = QtGui.QWidget()
         self.slides.setObjectName("slides")
 
-        self.hboxlayout1 = QtGui.QHBoxLayout(self.slides)
-        self.hboxlayout1.setMargin(9)
-        self.hboxlayout1.setSpacing(6)
-        self.hboxlayout1.setObjectName("hboxlayout1")
+        self.vboxlayout6 = QtGui.QVBoxLayout(self.slides)
+        self.vboxlayout6.setMargin(9)
+        self.vboxlayout6.setSpacing(6)
+        self.vboxlayout6.setObjectName("vboxlayout6")
 
         self.splitter = QtGui.QSplitter(self.slides)
         self.splitter.setOrientation(QtCore.Qt.Horizontal)
@@ -120,36 +120,58 @@ class Ui_MainWindow(object):
         self.slide_list.setUniformItemSizes(True)
         self.slide_list.setObjectName("slide_list")
 
-        self.layoutWidget = QtGui.QWidget(self.splitter)
-        self.layoutWidget.setObjectName("layoutWidget")
+        self.widget = QtGui.QWidget(self.splitter)
+        self.widget.setObjectName("widget")
 
-        self.vboxlayout6 = QtGui.QVBoxLayout(self.layoutWidget)
-        self.vboxlayout6.setMargin(0)
-        self.vboxlayout6.setSpacing(6)
-        self.vboxlayout6.setObjectName("vboxlayout6")
+        self.vboxlayout7 = QtGui.QVBoxLayout(self.widget)
+        self.vboxlayout7.setMargin(0)
+        self.vboxlayout7.setSpacing(6)
+        self.vboxlayout7.setObjectName("vboxlayout7")
+
+        self.hboxlayout1 = QtGui.QHBoxLayout()
+        self.hboxlayout1.setMargin(0)
+        self.hboxlayout1.setSpacing(6)
+        self.hboxlayout1.setObjectName("hboxlayout1")
+
+        self.label = QtGui.QLabel(self.widget)
+        self.label.setObjectName("label")
+        self.hboxlayout1.addWidget(self.label)
+
+        self.slide_title = QtGui.QLineEdit(self.widget)
+        self.slide_title.setObjectName("slide_title")
+        self.hboxlayout1.addWidget(self.slide_title)
+        self.vboxlayout7.addLayout(self.hboxlayout1)
 
         self.hboxlayout2 = QtGui.QHBoxLayout()
         self.hboxlayout2.setMargin(0)
         self.hboxlayout2.setSpacing(6)
         self.hboxlayout2.setObjectName("hboxlayout2")
 
-        self.label = QtGui.QLabel(self.layoutWidget)
-        self.label.setObjectName("label")
-        self.hboxlayout2.addWidget(self.label)
+        self.label_6 = QtGui.QLabel(self.widget)
+        self.label_6.setObjectName("label_6")
+        self.hboxlayout2.addWidget(self.label_6)
 
-        self.slide_title = QtGui.QLineEdit(self.layoutWidget)
-        self.slide_title.setObjectName("slide_title")
-        self.hboxlayout2.addWidget(self.slide_title)
-        self.vboxlayout6.addLayout(self.hboxlayout2)
+        self.in = QtGui.QComboBox(self.widget)
+        self.in.setObjectName("in")
+        self.hboxlayout2.addWidget(self.in)
 
-        self.slide_text = QtGui.QTextEdit(self.layoutWidget)
+        self.label_7 = QtGui.QLabel(self.widget)
+        self.label_7.setObjectName("label_7")
+        self.hboxlayout2.addWidget(self.label_7)
+
+        self.out = QtGui.QComboBox(self.widget)
+        self.out.setObjectName("out")
+        self.hboxlayout2.addWidget(self.out)
+        self.vboxlayout7.addLayout(self.hboxlayout2)
+
+        self.slide_text = QtGui.QTextEdit(self.widget)
 
         font = QtGui.QFont(self.slide_text.font())
         font.setFamily("Bitstream Vera Sans Mono")
         self.slide_text.setFont(font)
         self.slide_text.setObjectName("slide_text")
-        self.vboxlayout6.addWidget(self.slide_text)
-        self.hboxlayout1.addWidget(self.splitter)
+        self.vboxlayout7.addWidget(self.slide_text)
+        self.vboxlayout6.addWidget(self.splitter)
         self.tabWidget.addTab(self.slides,"")
         self.vboxlayout.addWidget(self.tabWidget)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -282,6 +304,18 @@ class Ui_MainWindow(object):
         self.label_5.setText(QtGui.QApplication.translate("MainWindow", "Footer:", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.presentation), QtGui.QApplication.translate("MainWindow", "Presentation", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Slide Title:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_6.setText(QtGui.QApplication.translate("MainWindow", "In:", None, QtGui.QApplication.UnicodeUTF8))
+        self.in.addItem(QtGui.QApplication.translate("MainWindow", "From Bottom", None, QtGui.QApplication.UnicodeUTF8))
+        self.in.addItem(QtGui.QApplication.translate("MainWindow", "From Left", None, QtGui.QApplication.UnicodeUTF8))
+        self.in.addItem(QtGui.QApplication.translate("MainWindow", "From Right", None, QtGui.QApplication.UnicodeUTF8))
+        self.in.addItem(QtGui.QApplication.translate("MainWindow", "From Top", None, QtGui.QApplication.UnicodeUTF8))
+        self.in.addItem(QtGui.QApplication.translate("MainWindow", "Fade In", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_7.setText(QtGui.QApplication.translate("MainWindow", "Out:", None, QtGui.QApplication.UnicodeUTF8))
+        self.out.addItem(QtGui.QApplication.translate("MainWindow", "To Bottom", None, QtGui.QApplication.UnicodeUTF8))
+        self.out.addItem(QtGui.QApplication.translate("MainWindow", "To Left", None, QtGui.QApplication.UnicodeUTF8))
+        self.out.addItem(QtGui.QApplication.translate("MainWindow", "To Right", None, QtGui.QApplication.UnicodeUTF8))
+        self.out.addItem(QtGui.QApplication.translate("MainWindow", "To Top", None, QtGui.QApplication.UnicodeUTF8))
+        self.out.addItem(QtGui.QApplication.translate("MainWindow", "Fade out", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.slides), QtGui.QApplication.translate("MainWindow", "Slides", None, QtGui.QApplication.UnicodeUTF8))
         self.menu_File.setTitle(QtGui.QApplication.translate("MainWindow", "&File", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHelp.setTitle(QtGui.QApplication.translate("MainWindow", "Help", None, QtGui.QApplication.UnicodeUTF8))

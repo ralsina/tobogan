@@ -132,7 +132,7 @@
        <attribute name="title" >
         <string>Slides</string>
        </attribute>
-       <layout class="QHBoxLayout" >
+       <layout class="QVBoxLayout" >
         <property name="margin" >
          <number>9</number>
         </property>
@@ -160,7 +160,7 @@
             <bool>true</bool>
            </property>
           </widget>
-          <widget class="QWidget" name="layoutWidget" >
+          <widget class="QWidget" name="" >
            <layout class="QVBoxLayout" >
             <property name="margin" >
              <number>0</number>
@@ -185,6 +185,88 @@
               </item>
               <item>
                <widget class="QLineEdit" name="slide_title" />
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" >
+              <property name="margin" >
+               <number>0</number>
+              </property>
+              <property name="spacing" >
+               <number>6</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_6" >
+                <property name="text" >
+                 <string>In:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="in" >
+                <item>
+                 <property name="text" >
+                  <string>From Bottom</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text" >
+                  <string>From Left</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text" >
+                  <string>From Right</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text" >
+                  <string>From Top</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text" >
+                  <string>Fade In</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_7" >
+                <property name="text" >
+                 <string>Out:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="out" >
+                <item>
+                 <property name="text" >
+                  <string>To Bottom</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text" >
+                  <string>To Left</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text" >
+                  <string>To Right</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text" >
+                  <string>To Top</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text" >
+                  <string>Fade out</string>
+                 </property>
+                </item>
+               </widget>
               </item>
              </layout>
             </item>

@@ -14,8 +14,11 @@ import docutils
 from docutils import frontend, nodes, utils
 from docutils.writers import html4css1
 from docutils.parsers.rst import directives
+from docutils import nodes
+import rst2rst
 
-
+from pprint import pprint
+    
 class Writer(html4css1.Writer):
 
     settings_default_overrides = {'toc_backlinks': 0}
@@ -44,7 +47,7 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
     <script type="text/javascript">
 
     slides=[%(sections)s];
-    transitions=['slide_bottom','slide_left','slide_bottom','slide_left','slide_bottom','slide_left','slide_bottom','slide_left','slide_bottom','slide_left'];
+    transitions=[%(transitions)s];
 
     var current=-1;
     var numPages=%(numPages)s;
@@ -85,9 +88,16 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
         var sl_h=ph*.9;
         var sl_w=pw*.9;
 
-        effects={   'slide_bottom': ['top',topMargin+'px',ph+'px'],
-                    'slide_left': ['left',leftMargin+'px',pw+'px'],
-                    'fade': ['left',leftMargin+'px',pw+'px']
+        effects={   'from_bottom': ['top',ph+'px',topMargin+'px'],
+                    'to_bottom': ['top',topMargin+'px',ph+'px'],
+                    'from_top': ['top',-ph+'px',topMargin+'px'],
+                    'to_top': ['top',topMargin+'px',-ph+'px'],
+                    'from_left': ['left',-pw+'px',leftMargin+'px'],
+                    'to_left': ['left',leftMargin+'px',-pw+'px'],
+                    'from_right': ['left',pw+'px',leftMargin+'px'],
+                    'to_right': ['left',leftMargin+'px',pw+'px'],
+                    'fade_in': ['opacity',0,1],
+                    'fade_out': ['opacity',1,0]
                 };
                 
         for (var i=0;i<numPages;i++)
@@ -112,34 +122,36 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
     });
 
 
-    function slide_out() {
-        if ( current > -1 && current < numPages )
-        {
-            var slide=$(slides[current]);
-            var trans=effects[transitions[current*2]];
-            var eff1=slide.effect(trans[0],{
-                    duration: delay
-            });
-            eff1.start(trans[1],trans[2]).chain (function () {
-                slide.setStyle(trans[0],trans[1]);
-                slide.setStyle('visibility','hidden');
-                });
-        }
-    }
 
     function slide_in() {
         if ( current > -1 && current < numPages )
         {
             var slide=$(slides[current]);
-            var trans=effects[transitions[current*2+1]];
-            var eff1=slide.effect(trans[0],{
+            var trans=effects[transitions[current*2]];
+            var eff_in=slide.effect(trans[0],{
                     duration: delay});
-            slide.setStyle(trans[0],trans[2]);
+            slide.setStyle(trans[0],trans[1]);
             slide.setStyle('visibility','visible');
-            eff1.start(trans[2],trans[1]);
+            eff_in.start(trans[1],trans[2]);
         }
     }
 
+
+    function slide_out() {
+        if ( current > -1 && current < numPages )
+        {
+            var slide=$(slides[current]);
+            var trans=effects[transitions[current*2+1]];
+            var eff_out=slide.effect(trans[0],{
+                    duration: delay
+            });
+            eff_out.start(trans[1],trans[2]).chain (function () {
+                slide.setStyle(trans[0],trans[1]);
+                slide.setStyle('visibility','hidden');
+                });
+        }
+    }    
+    
     function next() {
         if (current < numPages-2)
         {
@@ -181,7 +193,7 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
         self.sl_header=[]
         self.sl_footer=[]
         self.stylesheet.append(self.extra_head)
-        self.sections=[]
+        self.sections=[]        
 
     def depart_document(self, node):
         header = ''.join(self.sl_header)
@@ -191,7 +203,8 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
                                          'title': title,
                                          'footer': footer,
                                          'numPages': self.section_count+1,
-                                         'sections': "'slide0','"+"','".join(self.sections)+"'"
+                                         'sections': "'slide0','"+"','".join(self.sections)+"'",
+                                         'transitions': ','.join(["'%s'"%t for t in self.transitions])
                                          }
         self.fragment.extend(self.body)
         self.body_prefix.append('<div id="__presentation" class="sl_presentation">\n')
@@ -211,6 +224,15 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
                               + self.docinfo + self.body
                               + self.body_suffix[:-1])
 
+    def visit_field(self,node):
+        # See if it's our special node field
+        if isinstance(node.parent,nodes.docinfo):
+            if node.children[0][0] == "transitions":
+                self.transitions=rst2rst.gen_rst(node.children[1],0).strip().split(',')
+        html4css1.HTMLTranslator.visit_field(self, node)
+        
+            
+                              
     def visit_section(self, node):
         if not self.section_count:
             self.body.append('\n</div>\n')

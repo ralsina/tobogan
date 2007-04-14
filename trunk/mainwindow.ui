@@ -160,7 +160,7 @@
             <bool>true</bool>
            </property>
           </widget>
-          <widget class="QWidget" name="" >
+          <widget class="QWidget" name="layoutWidget" >
            <layout class="QVBoxLayout" >
             <property name="margin" >
              <number>0</number>
@@ -204,7 +204,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="in" >
+               <widget class="QComboBox" name="intrans" >
                 <item>
                  <property name="text" >
                   <string>From Bottom</string>
@@ -240,7 +240,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="out" >
+               <widget class="QComboBox" name="outtrans" >
                 <item>
                  <property name="text" >
                   <string>To Bottom</string>

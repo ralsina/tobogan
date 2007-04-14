@@ -1,12 +1,19 @@
 Why use BartleBlog
 ==================
 
+(If you are a nerd)
+~~~~~~~~~~~~~~~~~~~
+
+
+:author: Roberto Alsina <ralsina@kde.org>
+
+:transitions: from_left,to_left,from_top,to_top,from_right,to_right,from_bottom,to_bottom,fade_in,fade_out
+
+
 .. header:: This space for rent.
 
 .. footer:: This space too
 
-(If you are a nerd)
-~~~~~~~~~~~~~~~~~~~
 
 :author: Roberto Alsina <ralsina@kde.org>
 

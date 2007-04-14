@@ -48,16 +48,16 @@ html,body {
 
 .sl_header {
       position: absolute;
-      top: 5px;
-      left: 25px;
+      top: 0px;
+      left: 0px;
       font-size: 75%;
       z-index:800;
 }
 
 .sl_footer {
       position: absolute;
-      bottom: 5px;
-      left: 25px;
+      bottom: 0px;
+      left: 0px;
       font-size: 20px;
       z-index:800;
       font-size: 75%;

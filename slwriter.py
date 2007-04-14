@@ -75,7 +75,6 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
     
     function adjustSlides(){
 
-
         var pres=$('__presentation');
         pres.setStyle('width',window.getWidth());
         pres.setStyle('height',window.getHeight());
@@ -229,6 +228,8 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
         if isinstance(node.parent,nodes.docinfo):
             if node.children[0][0] == "transitions":
                 self.transitions=rst2rst.gen_rst(node.children[1],0).strip().split(',')
+                node.children=[]
+                return        
         html4css1.HTMLTranslator.visit_field(self, node)
         
             

@@ -14,6 +14,10 @@ import sourcecode
 from pprint import pprint
 import rst2sl
 
+transition_names=['from_bottom','from_left','from_right','from_top','fade_in','to_bottom','to_left','to_right','to_top','fade_out']
+num_trans=len(transition_names)/2
+
+
 def titleFromNode(node):
     title=''
     for n in node.children:
@@ -51,6 +55,7 @@ class MainWindow(QtGui.QMainWindow):
         self.tree=None
         self.nodes={}
         self.slides=[]
+        self.transitions=[]
         
     def exportHTML(self):
         self.htmlfn='.'.join(self.fn.split('.')[:-1])+'.html'
@@ -79,6 +84,10 @@ class MainWindow(QtGui.QMainWindow):
         t.append('')
         
         self.data=self.data+'\n'.join(t)
+
+        #Docinfo
+        self.data+='\n:transitions: '+','.join(self.transitions)+'\n'
+        
     
         for slide in self.slides:
             self.data=self.data+'\n'+self.slideToText(slide)
@@ -98,11 +107,11 @@ class MainWindow(QtGui.QMainWindow):
         return '\n'.join(t)+slide[1]
         
         
-    def openSlide(self,n):
-        self.ui.slide_title.setText(self.slides[n][0])
-        self.ui.slide_text.setText(self.slides[n][1])
-        
     def processDocument(self):    
+        self.nodes={}
+        self.slides=[]
+        self.transitions=[]
+
         for node in self.tree.children:
             if isinstance(node,docutils.nodes.title):
                 # Presentation title
@@ -130,16 +139,35 @@ class MainWindow(QtGui.QMainWindow):
             else:
                 print "2: Unknown node",pprint(node)
                 print rst2rst.gather_rst(node,0)
+            #self.matchTransitions()
             self.updateSlideList()
 
+    def matchTransitions(self):
+        print "t1: ",self.transitions
+        while len(self.transitions) < 2+2*len(self.slides):
+            self.transitions+=['from_bottom','to_bottom']
+        self.transitions=self.transitions[:2+2*len(self.slides)]
+        print "t2: ",self.transitions
+            
     def updateSlideList(self):
         self.ui.slide_list.clear()
         for slide in self.slides:
             self.ui.slide_list.addItem(slide[0])
             
+    def openSlide(self,n):
+        self.ui.slide_title.setText(self.slides[n][0])
+        self.ui.slide_text.setText(self.slides[n][1])
+        
+        self.ui.intrans.setCurrentIndex(transition_names.index(self.transitions[2+n*2]))
+        self.ui.outtrans.setCurrentIndex(transition_names.index(self.transitions[3+n*2])-num_trans)
+        
             
     def addDocInfo(self,node):
-        pass
+        for n in node.children:
+            text=rst2rst.gen_rst(n,0)
+            if text.startswith(':transitions:'):
+                self.transitions=text[13:].strip().split(',')
+                print "trans: ",self.transitions
 
     def openFile(self):
         fn=str(QtGui.QFileDialog.getOpenFileName (self))

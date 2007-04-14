@@ -44,84 +44,17 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
     <script type="text/javascript">
 
     slides=[%(sections)s];
+    transitions=['slide_bottom','fade','slide_left','slide_bottom','fade','slide_left','slide_bottom','fade','slide_left','fade','slide_left','slide_bottom','fade','slide_left'];
 
     var current=-1;
     var numPages=%(numPages)s;
-    var delay=1500;
+    var delay=750;
     var pw=0;
     var ph=0;
     var topMargin=0;
     var leftMargin=0;
-
-    window.addEvent('domready', function() {
-        var pres=$('__presentation');
-        pres.setStyle('width',window.getWidth());
-        pres.setStyle('height',window.getHeight());
-
-        var size=pres.getSize();
-        pw=size['size']['x'];
-        ph=size['size']['y'];
-        topMargin=ph*.05;
-        leftMargin=pw*.05;
-        var sl_h=ph*.9;
-        var sl_w=pw*.9;
-
-        for (var i=0;i<numPages;i++)
-        {
-                slide=$(slides[i]);
-                slide.setStyle('top',ph+'px');
-                slide.setStyle('left',leftMargin+'px');
-                slide.setStyle('width',sl_w+'px');
-                slide.setStyle('height',sl_h+'px');
-        }
-    });
-
-    window.addEvent('load',function() {
-        current=-1;
-        next();
-    });
-
-
-    function slide_out() {
-        if ( current > -1 && current < numPages )
-        {
-            var eff1=$(slides[current]).effects({
-                    duration: delay
-            });
-        eff1.start({'top': [ph] }
-                );
-        }
-    }
-
-    function slide_in() {
-        if ( current > -1 && current < numPages )
-        {
-            var eff1=$(slides[current]).effects({
-                    duration: delay
-            });
-        eff1.start({'top': [topMargin] });
-        }
-    }
-
-    function next() {
-        if (current < numPages-2)
-        {
-            slide_out();
-            current=current+1;
-            slide_in();
-        }
-    };
-
-    function prev() {
-        if ( current > 0)
-        {
-            slide_out();
-            current=current-1;
-            slide_in();
-        }
-    }
-
-
+    var effects;
+    
     function controls_in() {
 
         var eff=$('controlBox').effect('top',{
@@ -136,6 +69,97 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
         });
         eff.start(-100);
     }
+    
+    function adjustSlides(){
+
+
+        var pres=$('__presentation');
+        pres.setStyle('width',window.getWidth());
+        pres.setStyle('height',window.getHeight());
+
+        var size=pres.getSize();
+        pw=size['size']['x'];
+        ph=size['size']['y'];
+        topMargin=ph*.05;
+        leftMargin=pw*.05;
+        var sl_h=ph*.9;
+        var sl_w=pw*.9;
+
+        effects={   'slide_bottom': ['top',topMargin+'px',ph+'px'],
+                    'slide_left': ['left',leftMargin+'px',pw+'px'],
+                    'fade': ['left',leftMargin+'px',pw+'px']
+                };
+                
+        for (var i=0;i<numPages;i++)
+        {            
+            slide=$(slides[i]);
+            if (slide) {
+                slide.setStyle('visibility','hidden');
+                slide.setStyle('top',topMargin+'px');
+                slide.setStyle('left',leftMargin+'px');
+                slide.setStyle('width',sl_w+'px');
+                slide.setStyle('height',sl_h+'px');
+            }
+        }
+    };
+    
+    window.addEvent('domready', adjustSlides );
+    window.addEvent('resize', adjustSlides );
+
+    window.addEvent('load',function() {
+        current=-1;
+        next();
+    });
+
+
+    function slide_out() {
+        if ( current > -1 && current < numPages )
+        {
+            var slide=$(slides[current]);
+            var trans=effects[transitions[current*2+1]];
+            var eff1=slide.effect(trans[0],{
+                    duration: delay
+            });
+            eff1.start(trans[1],trans[2]).chain (function () {
+                slide.setStyle(trans[0],trans[1]);
+                slide.setStyle('visibility','hidden');
+                });
+        }
+    }
+
+    function slide_in() {
+        if ( current > -1 && current < numPages )
+        {
+            var slide=$(slides[current]);
+            var trans=effects[transitions[current*2]];
+            var eff1=slide.effect(trans[0],{
+                    duration: delay});
+            console.log([trans[0],trans[2]]);
+            slide.setStyle(trans[0],trans[2]);
+            slide.setStyle('visibility','visible');
+            eff1.start(trans[2],trans[1]);
+        }
+    }
+
+    function next() {
+        if (current < numPages-2)
+        {
+            slide_out();
+            current=current+1;
+            slide_in.delay(delay);
+        }
+    };
+
+    function prev() {
+        if (current > 0)
+        {
+            slide_out();
+            current=current-1;
+            slide_in.delay(delay);
+        }
+    }
+
+
     </script>
 
 
@@ -201,7 +225,7 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
 
 
     def depart_section(self, node):
-        if self.section_level <= 1:
+        if self.section_level ==1:
             self.sections.append(node['ids'][0])
         html4css1.HTMLTranslator.depart_section(self,node)
 

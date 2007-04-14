@@ -12,6 +12,7 @@ import rst2rst,pprint,codecs
 import docutils.core
 import sourcecode
 from pprint import pprint
+import rst2sl
 
 def titleFromNode(node):
     title=''
@@ -34,9 +35,14 @@ class MainWindow(QtGui.QMainWindow):
             QtCore.SIGNAL("triggered()"),
             self.openFile)
 
+        QtCore.QObject.connect(self.ui.actionExport_HTML,
+            QtCore.SIGNAL("triggered()"),
+            self.exportHTML)
+
         QtCore.QObject.connect(self.ui.action_Save,
             QtCore.SIGNAL("triggered()"),
             self.saveFile)
+
         QtCore.QObject.connect(self.ui.slide_list,
             QtCore.SIGNAL("currentRowChanged(int)"),
             self.openSlide)
@@ -46,7 +52,16 @@ class MainWindow(QtGui.QMainWindow):
         self.nodes={}
         self.slides=[]
         
-    def saveFile(self):
+    def exportHTML(self):
+        self.htmlfn='.'.join(self.fn.split('.')[:-1])+'.html'
+        self.generateData()            
+        html,code=rst2sl.rst2sl(self.data)
+        codecs.open(self.htmlfn,'w','utf-8').write(html)
+        
+    def generateData(self):
+        # FIXME these should actually be just modifications to the
+        # docutils nodes and then a call to gen_rst but that's
+        # for later ;-)
     
         self.data=''
     
@@ -63,12 +78,16 @@ class MainWindow(QtGui.QMainWindow):
         t.append('-'*len(tit))
         t.append('')
         
-        data=data+'\n'.join(t)
+        self.data=self.data+'\n'.join(t)
     
         for slide in self.slides:
-            data=data+'\n'+self.slideToText(slide)
+            self.data=self.data+'\n'+self.slideToText(slide)
             
-        codecs.open(self.fn,'w','utf-8').write(data)
+        # FIXME handle header and footer
+        
+    def saveFile(self):
+        self.generateData()            
+        codecs.open(self.fn,'w','utf-8').write(self.data)
         
     def slideToText(self,slide):
         t=[]

@@ -44,7 +44,7 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
     <script type="text/javascript">
 
     slides=[%(sections)s];
-    transitions=['slide_bottom','fade','slide_left','slide_bottom','fade','slide_left','slide_bottom','fade','slide_left','fade','slide_left','slide_bottom','fade','slide_left'];
+    transitions=['slide_bottom','slide_left','slide_bottom','slide_left','slide_bottom','slide_left','slide_bottom','slide_left','slide_bottom','slide_left'];
 
     var current=-1;
     var numPages=%(numPages)s;
@@ -116,7 +116,7 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
         if ( current > -1 && current < numPages )
         {
             var slide=$(slides[current]);
-            var trans=effects[transitions[current*2+1]];
+            var trans=effects[transitions[current*2]];
             var eff1=slide.effect(trans[0],{
                     duration: delay
             });
@@ -131,10 +131,9 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
         if ( current > -1 && current < numPages )
         {
             var slide=$(slides[current]);
-            var trans=effects[transitions[current*2]];
+            var trans=effects[transitions[current*2+1]];
             var eff1=slide.effect(trans[0],{
                     duration: delay});
-            console.log([trans[0],trans[2]]);
             slide.setStyle(trans[0],trans[2]);
             slide.setStyle('visibility','visible');
             eff1.start(trans[2],trans[1]);

@@ -72,8 +72,8 @@ class MainWindow(QtGui.QMainWindow):
             return
         self.slides[n][0]=unicode(self.ui.slide_title.text())
         self.slides[n][1]=unicode(self.ui.slide_text.toPlainText())
-        self.transitions[2+n*2]=transition_names[self.ui.intrans.currentIndex()]
-        self.transitions[3+n*2]=transition_names[self.ui.outtrans.currentIndex()+num_trans]
+        self.transitions[n*2]=transition_names[self.ui.intrans.currentIndex()]
+        self.transitions[1+n*2]=transition_names[self.ui.outtrans.currentIndex()+num_trans]
     
     def openSlide(self,n):
         if n==-1:
@@ -81,8 +81,8 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.slide_title.setText(self.slides[n][0])
         self.ui.slide_text.setText(self.slides[n][1])
         
-        self.ui.intrans.setCurrentIndex(transition_names.index(self.transitions[2+n*2]))
-        self.ui.outtrans.setCurrentIndex(transition_names.index(self.transitions[3+n*2])-num_trans)
+        self.ui.intrans.setCurrentIndex(transition_names.index(self.transitions[n*2]))
+        self.ui.outtrans.setCurrentIndex(transition_names.index(self.transitions[1+n*2])-num_trans)
         
     def exportHTML(self):
         self.htmlfn='.'.join(self.fn.split('.')[:-1])+'.html'
@@ -116,7 +116,7 @@ class MainWindow(QtGui.QMainWindow):
         self.data+='\n:transitions: '+','.join(self.transitions)+'\n'
         
     
-        for slide in self.slides:
+        for slide in self.slides[1:]:
             self.data=self.data+'\n'+self.slideToText(slide)
             
         self.data+='\n\n.. header:: %s\n\n.. footer:: %s\n\n'%(unicode(self.ui.header.text()),
@@ -137,7 +137,7 @@ class MainWindow(QtGui.QMainWindow):
         
     def processDocument(self):    
         self.nodes={}
-        self.slides=[]
+        self.slides=[['Cover Slide','You can\'tedit this in this version']]
         self.transitions=[]
 
         for node in self.tree.children:
@@ -172,9 +172,9 @@ class MainWindow(QtGui.QMainWindow):
 
     def matchTransitions(self):
         print "t1: ",self.transitions
-        while len(self.transitions) < 2+2*len(self.slides):
+        while len(self.transitions) < 2*len(self.slides):
             self.transitions+=['from_bottom','to_bottom']
-        self.transitions=self.transitions[:2+2*len(self.slides)]
+        self.transitions=self.transitions[:2*len(self.slides)]
         print "t2: ",self.transitions
             
     def updateSlideList(self):

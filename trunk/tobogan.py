@@ -56,6 +56,14 @@ class MainWindow(QtGui.QMainWindow):
             QtCore.SIGNAL("triggered()"),
             self.preview)
 
+        QtCore.QObject.connect(self.ui.actionMove_Up,
+            QtCore.SIGNAL("triggered()"),
+            self.moveSlideUp)
+
+        QtCore.QObject.connect(self.ui.actionMove_Down,
+            QtCore.SIGNAL("triggered()"),
+            self.moveSlideDown)
+
         QtCore.QObject.connect(self.ui.slide_list,
             QtCore.SIGNAL("currentItemChanged ( QListWidgetItem *, QListWidgetItem *)"),
             self.switchSlide)
@@ -79,6 +87,41 @@ class MainWindow(QtGui.QMainWindow):
         fn=os.path.join(dn,self.fn+'.html')
         self.exportHTML(fn)
         QtGui.QDesktopServices.openUrl(QtCore.QUrl(fn))
+
+    def moveSlideUp(self):
+        r=self.ui.slide_list.currentRow()
+        if r<2:
+            return
+        QtCore.QObject.disconnect(self.ui.slide_list,
+            QtCore.SIGNAL("currentItemChanged ( QListWidgetItem *, QListWidgetItem *)"),
+            self.switchSlide)
+        r2=r-1
+        t=self.slides[r2]        
+        self.slides[r2]=self.slides[r]
+        self.slides[r]=t
+        self.updateSlideList()
+        self.ui.slide_list.setCurrentRow(r2)
+        QtCore.QObject.connect(self.ui.slide_list,
+            QtCore.SIGNAL("currentItemChanged ( QListWidgetItem *, QListWidgetItem *)"),
+            self.switchSlide)
+
+    def moveSlideDown(self):
+        r=self.ui.slide_list.currentRow()
+        if r<1 or r>=len(self.slides)-1:
+            return
+        QtCore.QObject.disconnect(self.ui.slide_list,
+            QtCore.SIGNAL("currentItemChanged ( QListWidgetItem *, QListWidgetItem *)"),
+            self.switchSlide)
+        r2=r+1
+        t=self.slides[r2]        
+        self.slides[r2]=self.slides[r]
+        self.slides[r]=t
+        self.updateSlideList()
+        self.ui.slide_list.setCurrentRow(r2)
+        QtCore.QObject.connect(self.ui.slide_list,
+            QtCore.SIGNAL("currentItemChanged ( QListWidgetItem *, QListWidgetItem *)"),
+            self.switchSlide)
+
         
     def switchSlide(self,current,previous):
         pos_prev=self.ui.slide_list.row(previous)
@@ -170,8 +213,7 @@ class MainWindow(QtGui.QMainWindow):
         t.append('')
         t.append('')
         return '\n'.join(t)+slide[1]
-        
-        
+                
     def processDocument(self):    
         self.nodes={}
         self.slides=[['Cover Slide','You can\'tedit this in this version']]
@@ -241,7 +283,7 @@ class MainWindow(QtGui.QMainWindow):
         self.tree=docutils.core.publish_doctree(self.data)
         
         self.processDocument()
-
+        
 def main():
     app=QtGui.QApplication(sys.argv)
     window=MainWindow(sys.argv[1])

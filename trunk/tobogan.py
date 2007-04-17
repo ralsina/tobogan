@@ -4,6 +4,7 @@
 import codecs
 import sys
 import os
+import tempfile
 
 from PyQt4 import QtGui, QtCore
 
@@ -47,6 +48,14 @@ class MainWindow(QtGui.QMainWindow):
             QtCore.SIGNAL("triggered()"),
             self.saveFile)
 
+        QtCore.QObject.connect(self.ui.actionSave_as,
+            QtCore.SIGNAL("triggered()"),
+            self.saveFileAs)
+
+        QtCore.QObject.connect(self.ui.actionPreview,
+            QtCore.SIGNAL("triggered()"),
+            self.preview)
+
         QtCore.QObject.connect(self.ui.slide_list,
             QtCore.SIGNAL("currentItemChanged ( QListWidgetItem *, QListWidgetItem *)"),
             self.switchSlide)
@@ -59,6 +68,13 @@ class MainWindow(QtGui.QMainWindow):
         if fname:
             self.openFile(fname)
             
+        
+    def preview(self):
+        # Create a temporary folder
+        dn=tempfile.mkdtemp()
+        fn=os.path.join(dn,self.fn+'.html')
+        self.exportHTML(fn)
+        QtGui.QDesktopServices.openUrl(QtCore.QUrl(fn))
         
     def switchSlide(self,current,previous):
         pos_prev=self.ui.slide_list.row(previous)
@@ -84,11 +100,13 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.intrans.setCurrentIndex(transition_names.index(self.transitions[n*2]))
         self.ui.outtrans.setCurrentIndex(transition_names.index(self.transitions[1+n*2])-num_trans)
         
-    def exportHTML(self):
-        self.htmlfn='.'.join(self.fn.split('.')[:-1])+'.html'
+    def exportHTML(self,fname=None):
+        if not fname:
+            fname='.'.join(self.fn.split('.')[:-1])+'.html'
+            
         self.generateData()            
         html,code=rst2sl.rst2sl(self.data)
-        codecs.open(self.htmlfn,'w','utf-8').write(html)
+        codecs.open(fname,'w','utf-8').write(html)
         
     def generateData(self):
 
@@ -128,9 +146,17 @@ class MainWindow(QtGui.QMainWindow):
         self.data+='\n\n.. header:: %s\n\n.. footer:: %s\n\n'%(unicode(self.ui.header.text()),
                                                                 unicode(self.ui.footer.text()))
         
-    def saveFile(self):
-        self.generateData()            
-        codecs.open(self.fn,'w','utf-8').write(self.data)
+    def saveFileAs(self):
+        fn=str(QtGui.QFileDialog.getSaveFileName (self))
+        if fn:
+            self.fn=fn
+            self.saveFile()
+        
+    def saveFile(self,fname=None):
+        self.generateData()     
+        if not fname:
+            fname=self.fn
+        codecs.open(fname,'w','utf-8').write(self.data)
         
     def slideToText(self,slide):
         t=[]

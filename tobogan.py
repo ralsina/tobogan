@@ -119,6 +119,7 @@ class MainWindow(QtGui.QMainWindow):
 
         #Docinfo
         self.data+='\n:transitions: '+','.join(self.transitions)+'\n'
+        self.data+=unicode(self.ui.docinfo.toPlainText())
         
     
         for slide in self.slides[1:]:
@@ -188,11 +189,15 @@ class MainWindow(QtGui.QMainWindow):
             self.ui.slide_list.addItem(slide[0])
             
     def addDocInfo(self,node):
+        t=''
         for n in node.children:
             text=rst2rst.gen_rst(n,0)
             if text.startswith(':transitions:'):
                 self.transitions=text[13:].strip().split(',')
-                print "trans: ",self.transitions
+            else:
+                t+=text
+        self.ui.docinfo.setText(t)
+            
 
     def openFile(self,fn=None):
         if not fn:

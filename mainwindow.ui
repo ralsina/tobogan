@@ -519,6 +519,9 @@
    </property>
   </action>
   <action name="actionMove_Up" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
    <property name="icon" >
     <iconset resource="icons.qrc" >:/icons/icons/1uparrow.png</iconset>
    </property>
@@ -527,6 +530,9 @@
    </property>
   </action>
   <action name="actionMove_Down" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
    <property name="icon" >
     <iconset resource="icons.qrc" >:/icons/icons/1downarrow.png</iconset>
    </property>

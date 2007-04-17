@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file '/mnt/centos/home/ralsina/Desktop/proyectos/tobogan/tobogan/mainwindow.ui'
 #
-# Created: Tue Apr 17 12:06:33 2007
+# Created: Tue Apr 17 14:59:16 2007
 #      by: PyQt4 UI code generator 4.1.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -264,10 +264,12 @@ class Ui_MainWindow(object):
         self.actionDelete_Slide.setObjectName("actionDelete_Slide")
 
         self.actionMove_Up = QtGui.QAction(MainWindow)
+        self.actionMove_Up.setEnabled(False)
         self.actionMove_Up.setIcon(QtGui.QIcon(":/icons/icons/1uparrow.png"))
         self.actionMove_Up.setObjectName("actionMove_Up")
 
         self.actionMove_Down = QtGui.QAction(MainWindow)
+        self.actionMove_Down.setEnabled(False)
         self.actionMove_Down.setIcon(QtGui.QIcon(":/icons/icons/1downarrow.png"))
         self.actionMove_Down.setObjectName("actionMove_Down")
         self.menuSlide.addAction(self.actionNewSlide)
@@ -351,10 +353,15 @@ class Ui_MainWindow(object):
         self.actionSave_as.setText(QtGui.QApplication.translate("MainWindow", "Save &as", None, QtGui.QApplication.UnicodeUTF8))
         self.action_Quit.setText(QtGui.QApplication.translate("MainWindow", "&Quit", None, QtGui.QApplication.UnicodeUTF8))
         self.actionUndo.setText(QtGui.QApplication.translate("MainWindow", "Undo", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionUndo.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+Z", None, QtGui.QApplication.UnicodeUTF8))
         self.actionRedo.setText(QtGui.QApplication.translate("MainWindow", "Redo", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionRedo.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+Shift+Z", None, QtGui.QApplication.UnicodeUTF8))
         self.actionCut.setText(QtGui.QApplication.translate("MainWindow", "Cut", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionCut.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+X", None, QtGui.QApplication.UnicodeUTF8))
         self.actionCopy.setText(QtGui.QApplication.translate("MainWindow", "Copy", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionCopy.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+C", None, QtGui.QApplication.UnicodeUTF8))
         self.actionPaste.setText(QtGui.QApplication.translate("MainWindow", "Paste", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionPaste.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+P", None, QtGui.QApplication.UnicodeUTF8))
         self.actionDelete.setText(QtGui.QApplication.translate("MainWindow", "Delete", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSelect_All.setText(QtGui.QApplication.translate("MainWindow", "Select All", None, QtGui.QApplication.UnicodeUTF8))
         self.action_Contents.setText(QtGui.QApplication.translate("MainWindow", "&Contents", None, QtGui.QApplication.UnicodeUTF8))

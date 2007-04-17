@@ -100,10 +100,10 @@ class MainWindow(QtGui.QMainWindow):
         self.slides[r2]=self.slides[r]
         self.slides[r]=t
         self.updateSlideList()
-        self.ui.slide_list.setCurrentRow(r2)
         QtCore.QObject.connect(self.ui.slide_list,
             QtCore.SIGNAL("currentItemChanged ( QListWidgetItem *, QListWidgetItem *)"),
             self.switchSlide)
+        self.ui.slide_list.setCurrentRow(r2)
 
     def moveSlideDown(self):
         r=self.ui.slide_list.currentRow()
@@ -117,15 +117,25 @@ class MainWindow(QtGui.QMainWindow):
         self.slides[r2]=self.slides[r]
         self.slides[r]=t
         self.updateSlideList()
-        self.ui.slide_list.setCurrentRow(r2)
         QtCore.QObject.connect(self.ui.slide_list,
             QtCore.SIGNAL("currentItemChanged ( QListWidgetItem *, QListWidgetItem *)"),
             self.switchSlide)
+        self.ui.slide_list.setCurrentRow(r2)
 
         
     def switchSlide(self,current,previous):
+            
         pos_prev=self.ui.slide_list.row(previous)
         pos_cur=self.ui.slide_list.row(current)
+
+        self.ui.actionMove_Up.setEnabled(True)
+        self.ui.actionMove_Down.setEnabled(True)
+        print pos_cur,len(self.slides)
+        if pos_cur in [-1,0,1]:
+            self.ui.actionMove_Up.setEnabled(False)
+        if pos_cur in [-1,0,len(self.slides)-1]:
+            self.ui.actionMove_Down.setEnabled(False)
+        
         
         self.saveSlide(pos_prev)
         self.openSlide(pos_cur)

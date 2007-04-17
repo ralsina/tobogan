@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/icons" >
+        <file>icons/1downarrow.png</file>
+        <file>icons/1uparrow.png</file>
+        <file>icons/delslide.png</file>
         <file>icons/edit.png</file>
         <file>icons/editcopy.png</file>
         <file>icons/editcut.png</file>
@@ -9,8 +12,10 @@
         <file>icons/fileopen.png</file>
         <file>icons/filesave.png</file>
         <file>icons/filesaveas.png</file>
+        <file>icons/newslide.png</file>
         <file>icons/redo.png</file>
         <file>icons/undo.png</file>
+        <file>icons/webexport.png</file>
         <file>icons/xeyes.png</file>
     </qresource>
 </RCC>

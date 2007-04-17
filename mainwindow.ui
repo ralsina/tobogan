@@ -37,94 +37,64 @@
          <number>6</number>
         </property>
         <item>
-         <layout class="QHBoxLayout" >
+         <layout class="QGridLayout" >
           <property name="margin" >
            <number>0</number>
           </property>
           <property name="spacing" >
            <number>6</number>
           </property>
-          <item>
-           <layout class="QVBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
-            <property name="spacing" >
-             <number>6</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="label_2" >
-              <property name="text" >
-               <string>Presentation Title:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_3" >
-              <property name="text" >
-               <string>Presentation Subtitle:</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+          <item row="1" column="1" >
+           <widget class="QLineEdit" name="pres_subtitle" />
           </item>
-          <item>
-           <layout class="QVBoxLayout" >
-            <property name="margin" >
-             <number>0</number>
-            </property>
-            <property name="spacing" >
-             <number>6</number>
-            </property>
-            <item>
-             <widget class="QLineEdit" name="pres_title" />
-            </item>
-            <item>
-             <widget class="QLineEdit" name="pres_subtitle" />
-            </item>
-           </layout>
+          <item row="0" column="1" >
+           <widget class="QLineEdit" name="pres_title" />
           </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" >
-          <property name="margin" >
-           <number>0</number>
-          </property>
-          <property name="spacing" >
-           <number>6</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="label_4" >
-            <property name="text" >
-             <string>Header:</string>
-            </property>
-           </widget>
+          <item row="2" column="1" >
+           <widget class="QLineEdit" name="header" />
           </item>
-          <item>
-           <widget class="QTextEdit" name="pres_header" />
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" >
-          <property name="margin" >
-           <number>0</number>
-          </property>
-          <property name="spacing" >
-           <number>6</number>
-          </property>
-          <item>
+          <item row="4" column="0" >
            <widget class="QLabel" name="label_5" >
             <property name="text" >
              <string>Footer:</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QTextEdit" name="pres_footer" />
+          <item rowspan="2" row="3" column="1" >
+           <widget class="QLineEdit" name="footer" />
+          </item>
+          <item rowspan="2" row="2" column="0" >
+           <widget class="QLabel" name="label_4" >
+            <property name="text" >
+             <string>Header:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" >
+           <widget class="QLabel" name="label_2" >
+            <property name="text" >
+             <string>Presentation Title:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="label_3" >
+            <property name="text" >
+             <string>Presentation Subtitle:</string>
+            </property>
+           </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_8" >
+          <property name="text" >
+           <string>Extra Info:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="docinfo" />
         </item>
        </layout>
       </widget>
@@ -152,6 +122,15 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="baseSize" >
+            <size>
+             <width>150</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="layoutDirection" >
+            <enum>Qt::LeftToRight</enum>
            </property>
            <property name="autoFillBackground" >
             <bool>false</bool>
@@ -272,6 +251,20 @@
             </item>
             <item>
              <widget class="QTextEdit" name="slide_text" >
+              <property name="sizePolicy" >
+               <sizepolicy>
+                <hsizetype>7</hsizetype>
+                <vsizetype>7</vsizetype>
+                <horstretch>4</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="baseSize" >
+               <size>
+                <width>450</width>
+                <height>0</height>
+               </size>
+              </property>
               <property name="font" >
                <font>
                 <family>Bitstream Vera Sans Mono</family>
@@ -298,20 +291,15 @@
      <height>31</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu_File" >
+   <widget class="QMenu" name="menuSlide" >
     <property name="title" >
-     <string>&amp;File</string>
+     <string>Slide</string>
     </property>
-    <addaction name="actionNew" />
+    <addaction name="actionNewSlide" />
+    <addaction name="actionDelete_Slide" />
     <addaction name="separator" />
-    <addaction name="action_Open" />
-    <addaction name="action_Save" />
-    <addaction name="actionSave_as" />
-    <addaction name="separator" />
-    <addaction name="actionExport_HTML" />
-    <addaction name="actionPreview" />
-    <addaction name="separator" />
-    <addaction name="action_Quit" />
+    <addaction name="actionMove_Up" />
+    <addaction name="actionMove_Down" />
    </widget>
    <widget class="QMenu" name="menuHelp" >
     <property name="title" >
@@ -333,9 +321,25 @@
     <addaction name="actionDelete" />
     <addaction name="actionSelect_All" />
    </widget>
+   <widget class="QMenu" name="menu_File" >
+    <property name="title" >
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionNew" />
+    <addaction name="separator" />
+    <addaction name="action_Open" />
+    <addaction name="action_Save" />
+    <addaction name="actionSave_as" />
+    <addaction name="separator" />
+    <addaction name="actionExport_HTML" />
+    <addaction name="actionPreview" />
+    <addaction name="separator" />
+    <addaction name="action_Quit" />
+   </widget>
    <addaction name="menu_File" />
    <addaction name="menu_Edit" />
    <addaction name="menuHelp" />
+   <addaction name="menuSlide" />
   </widget>
   <widget class="QStatusBar" name="statusbar" />
   <widget class="QToolBar" name="toolBar" >
@@ -346,8 +350,9 @@
     <number>4</number>
    </attribute>
    <addaction name="action_Open" />
-   <addaction name="actionNew" />
    <addaction name="action_Save" />
+   <addaction name="actionExport_HTML" />
+   <addaction name="actionPreview" />
    <addaction name="separator" />
    <addaction name="actionUndo" />
    <addaction name="actionRedo" />
@@ -355,7 +360,10 @@
    <addaction name="actionCopy" />
    <addaction name="actionPaste" />
    <addaction name="separator" />
-   <addaction name="actionPreview" />
+   <addaction name="actionNewSlide" />
+   <addaction name="actionDelete_Slide" />
+   <addaction name="actionMove_Up" />
+   <addaction name="actionMove_Down" />
   </widget>
   <action name="action_Open" >
    <property name="icon" >
@@ -399,6 +407,9 @@
    <property name="text" >
     <string>Undo</string>
    </property>
+   <property name="shortcut" >
+    <string>Ctrl+Z</string>
+   </property>
   </action>
   <action name="actionRedo" >
    <property name="icon" >
@@ -406,6 +417,9 @@
    </property>
    <property name="text" >
     <string>Redo</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+Shift+Z</string>
    </property>
   </action>
   <action name="actionCut" >
@@ -415,6 +429,9 @@
    <property name="text" >
     <string>Cut</string>
    </property>
+   <property name="shortcut" >
+    <string>Ctrl+X</string>
+   </property>
   </action>
   <action name="actionCopy" >
    <property name="icon" >
@@ -423,6 +440,9 @@
    <property name="text" >
     <string>Copy</string>
    </property>
+   <property name="shortcut" >
+    <string>Ctrl+C</string>
+   </property>
   </action>
   <action name="actionPaste" >
    <property name="icon" >
@@ -430,6 +450,9 @@
    </property>
    <property name="text" >
     <string>Paste</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+P</string>
    </property>
   </action>
   <action name="actionDelete" >
@@ -472,8 +495,43 @@
    </property>
   </action>
   <action name="actionExport_HTML" >
+   <property name="icon" >
+    <iconset resource="icons.qrc" >:/icons/icons/webexport.png</iconset>
+   </property>
    <property name="text" >
     <string>Export HTML</string>
+   </property>
+  </action>
+  <action name="actionNewSlide" >
+   <property name="icon" >
+    <iconset resource="icons.qrc" >:/icons/icons/newslide.png</iconset>
+   </property>
+   <property name="text" >
+    <string>New Slide</string>
+   </property>
+  </action>
+  <action name="actionDelete_Slide" >
+   <property name="icon" >
+    <iconset resource="icons.qrc" >:/icons/icons/delslide.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Delete Slide</string>
+   </property>
+  </action>
+  <action name="actionMove_Up" >
+   <property name="icon" >
+    <iconset resource="icons.qrc" >:/icons/icons/1uparrow.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Move Up</string>
+   </property>
+  </action>
+  <action name="actionMove_Down" >
+   <property name="icon" >
+    <iconset resource="icons.qrc" >:/icons/icons/1downarrow.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Move Down</string>
    </property>
   </action>
  </widget>

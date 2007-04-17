@@ -28,7 +28,7 @@ def titleFromNode(node):
     return title
 
 class MainWindow(QtGui.QMainWindow):
-    def __init__(self):
+    def __init__(self,fname=None):
         QtGui.QMainWindow.__init__(self)
 
         # Set up the UI from designer
@@ -48,14 +48,37 @@ class MainWindow(QtGui.QMainWindow):
             self.saveFile)
 
         QtCore.QObject.connect(self.ui.slide_list,
-            QtCore.SIGNAL("currentRowChanged(int)"),
-            self.openSlide)
+            QtCore.SIGNAL("currentItemChanged ( QListWidgetItem *, QListWidgetItem *)"),
+            self.switchSlide)
         
         self.data=None
         self.tree=None
         self.nodes={}
         self.slides=[]
         self.transitions=[]
+        if fname:
+            self.openFile(fname)
+            
+        
+    def switchSlide(self,current,previous):
+        pos_prev=self.ui.slide_list.row(previous)
+        pos_cur=self.ui.slide_list.row(current)
+        
+        self.saveSlide(pos_prev)
+        self.openSlide(pos_cur)
+    
+    def saveSlide(self,n):        
+        self.slides[n][0]=unicode(self.ui.slide_title.text())
+        self.slides[n][1]=unicode(self.ui.slide_text.toPlainText())
+        self.transitions[2+n*2]=transition_names[self.ui.intrans.currentIndex()]
+        self.transitions[3+n*2]=transition_names[self.ui.outtrans.currentIndex()+num_trans]
+    
+    def openSlide(self,n):
+        self.ui.slide_title.setText(self.slides[n][0])
+        self.ui.slide_text.setText(self.slides[n][1])
+        
+        self.ui.intrans.setCurrentIndex(transition_names.index(self.transitions[2+n*2]))
+        self.ui.outtrans.setCurrentIndex(transition_names.index(self.transitions[3+n*2])-num_trans)
         
     def exportHTML(self):
         self.htmlfn='.'.join(self.fn.split('.')[:-1])+'.html'
@@ -94,6 +117,7 @@ class MainWindow(QtGui.QMainWindow):
             
         # FIXME handle header and footer
         
+        
     def saveFile(self):
         self.generateData()            
         codecs.open(self.fn,'w','utf-8').write(self.data)
@@ -125,10 +149,10 @@ class MainWindow(QtGui.QMainWindow):
                 for subnode in node.children:
                     if isinstance(subnode,docutils.nodes.header):
                         self.nodes['header']=subnode
-                        self.ui.pres_header.setPlainText(rst2rst.gather_rst(subnode,0))
+                        self.ui.header.setText(rst2rst.gather_rst(subnode,0))
                     elif isinstance(subnode,docutils.nodes.footer):
                         self.nodes['footer']=subnode
-                        self.ui.pres_footer.setPlainText(rst2rst.gather_rst(subnode,0))
+                        self.ui.footer.setText(rst2rst.gather_rst(subnode,0))
                     else:
                         print "1: Unknown node",pprint(subnode)
                         
@@ -154,14 +178,6 @@ class MainWindow(QtGui.QMainWindow):
         for slide in self.slides:
             self.ui.slide_list.addItem(slide[0])
             
-    def openSlide(self,n):
-        self.ui.slide_title.setText(self.slides[n][0])
-        self.ui.slide_text.setText(self.slides[n][1])
-        
-        self.ui.intrans.setCurrentIndex(transition_names.index(self.transitions[2+n*2]))
-        self.ui.outtrans.setCurrentIndex(transition_names.index(self.transitions[3+n*2])-num_trans)
-        
-            
     def addDocInfo(self,node):
         for n in node.children:
             text=rst2rst.gen_rst(n,0)
@@ -169,8 +185,9 @@ class MainWindow(QtGui.QMainWindow):
                 self.transitions=text[13:].strip().split(',')
                 print "trans: ",self.transitions
 
-    def openFile(self):
-        fn=str(QtGui.QFileDialog.getOpenFileName (self))
+    def openFile(self,fn=None):
+        if not fn:
+            fn=str(QtGui.QFileDialog.getOpenFileName (self))
         if not fn:
             return
         self.fn=fn
@@ -181,7 +198,7 @@ class MainWindow(QtGui.QMainWindow):
 
 def main():
     app=QtGui.QApplication(sys.argv)
-    window=MainWindow()
+    window=MainWindow(sys.argv[1])
     window.show()
     sys.exit(app.exec_())
 

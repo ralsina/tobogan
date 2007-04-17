@@ -67,13 +67,17 @@ class MainWindow(QtGui.QMainWindow):
         self.saveSlide(pos_prev)
         self.openSlide(pos_cur)
     
-    def saveSlide(self,n):        
+    def saveSlide(self,n):    
+        if n==-1:
+            return
         self.slides[n][0]=unicode(self.ui.slide_title.text())
         self.slides[n][1]=unicode(self.ui.slide_text.toPlainText())
         self.transitions[2+n*2]=transition_names[self.ui.intrans.currentIndex()]
         self.transitions[3+n*2]=transition_names[self.ui.outtrans.currentIndex()+num_trans]
     
     def openSlide(self,n):
+        if n==-1:
+            return
         self.ui.slide_title.setText(self.slides[n][0])
         self.ui.slide_text.setText(self.slides[n][1])
         

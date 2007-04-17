@@ -65,9 +65,9 @@ class MainWindow(QtGui.QMainWindow):
         self.nodes={}
         self.slides=[]
         self.transitions=[]
+        self.fn='untitled.rst'
         if fname:
             self.openFile(fname)
-            
         
     def preview(self):
         # Create a temporary folder

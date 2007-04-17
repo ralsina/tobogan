@@ -119,8 +119,8 @@ class MainWindow(QtGui.QMainWindow):
         for slide in self.slides:
             self.data=self.data+'\n'+self.slideToText(slide)
             
-        # FIXME handle header and footer
-        
+        self.data+='\n\n.. header:: %s\n\n.. footer:: %s\n\n'%(unicode(self.ui.header.text()),
+                                                                unicode(self.ui.footer.text()))
         
     def saveFile(self):
         self.generateData()            

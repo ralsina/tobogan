@@ -66,8 +66,12 @@ class MainWindow(QtGui.QMainWindow):
         self.slides=[]
         self.transitions=[]
         self.fn='untitled.rst'
+        self.setTitle()
         if fname:
             self.openFile(fname)
+        
+    def setTitle(self):
+        self.setWindowTitle('Tobogan - %s'%self.fn)
         
     def preview(self):
         # Create a temporary folder
@@ -150,6 +154,7 @@ class MainWindow(QtGui.QMainWindow):
         fn=str(QtGui.QFileDialog.getSaveFileName (self))
         if fn:
             self.fn=fn
+            self.setTitle()
             self.saveFile()
         
     def saveFile(self,fname=None):
@@ -231,6 +236,7 @@ class MainWindow(QtGui.QMainWindow):
         if not fn:
             return
         self.fn=fn
+        self.setTitle()
         self.data=codecs.open(fn,"r","utf-8").read()
         self.tree=docutils.core.publish_doctree(self.data)
         

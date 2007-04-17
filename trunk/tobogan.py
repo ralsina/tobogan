@@ -91,6 +91,11 @@ class MainWindow(QtGui.QMainWindow):
         codecs.open(self.htmlfn,'w','utf-8').write(html)
         
     def generateData(self):
+
+        # Maybe the user modified current slide and never did anything
+        # else so it didn't get saved
+        self.saveSlide(self.ui.slide_list.currentRow())
+
         # FIXME these should actually be just modifications to the
         # docutils nodes and then a call to gen_rst but that's
         # for later ;-)

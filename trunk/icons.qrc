@@ -18,4 +18,10 @@
         <file>icons/webexport.png</file>
         <file>icons/xeyes.png</file>
     </qresource>
+    <qresource prefix="/" >
+        <file>resources/mootools.js</file>
+        <file>resources/code.css</file>
+        <file>resources/murphy.css</file>
+        <file>resources/slides.css</file>
+    </qresource>
 </RCC>

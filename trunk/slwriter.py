@@ -152,7 +152,7 @@ class SLHTMLTranslator(html4css1.HTMLTranslator):
     }    
     
     function next() {
-        if (current < numPages-2)
+        if (current < numPages-1)
         {
             slide_out();
             current=current+1;

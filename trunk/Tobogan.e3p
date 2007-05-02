@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.9.dtd">
 <!-- Project file for project Tobogan -->
-<!-- Saved: 2007-04-13, 19:23:59 -->
+<!-- Saved: 2007-05-02, 18:27:15 -->
 <!-- Copyright (C) 2007 Roberto Alsina, ralsina@kde.org -->
 <Project version="3.9">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -28,6 +28,9 @@
     </Source>
     <Source>
       <Name>rst2rst.py</Name>
+    </Source>
+    <Source>
+      <Name>icons_rc.py</Name>
     </Source>
   </Sources>
   <Forms>
@@ -114,9 +117,9 @@ s.</VcsOtherData>
   </Vcs>
   <FiletypeAssociations>
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
   </FiletypeAssociations>
 </Project>

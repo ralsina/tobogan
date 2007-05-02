@@ -91,7 +91,7 @@ Subtitle Here
 =============
 
 :Author: Unknown
-:transitions: from_bottom,to_bottom
+:transitions: from_bottom,to_bottom,from_bottom,to_bottom
 
 
 Slide 1
@@ -105,7 +105,7 @@ Slide 1
 
 
     def newSlide(self):
-        self.slides.append(['slide_%d'%(len(self.slides)+1),''])
+        self.slides.append(['Slide %d'%(len(self.slides)),''])
         self.transitions.append('from_bottom')
         self.transitions.append('to_bottom')
         self.updateSlideList()

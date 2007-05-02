@@ -67,7 +67,11 @@ class MainWindow(QtGui.QMainWindow):
         QtCore.QObject.connect(self.ui.actionNewSlide,
             QtCore.SIGNAL("triggered()"),
             self.newSlide)
-
+            
+        QtCore.QObject.connect(self.ui.actionDelete_Slide,
+            QtCore.SIGNAL("triggered()"),
+            self.delSlide)
+        
         QtCore.QObject.connect(self.ui.slide_list,
             QtCore.SIGNAL("currentItemChanged ( QListWidgetItem *, QListWidgetItem *)"),
             self.switchSlide)
@@ -110,6 +114,14 @@ Slide 1
         self.transitions.append('to_bottom')
         self.updateSlideList()
 
+    def delSlide(self):
+        c=self.ui.slide_list.currentRow()
+        if c>0:
+            del self.slides[c]
+            del self.transitions[c*2:c*2+1]
+        self.updateSlideList()
+        self.openSlide(c-1)
+            
     
     def setTitle(self):
         self.setWindowTitle('Tobogan - %s'%self.fn)
@@ -184,7 +196,7 @@ Slide 1
         self.openSlide(pos_cur)
     
     def saveSlide(self,n):    
-        if n==-1:
+        if n==-1 or n>len(self.slides)-1:
             return
         self.slides[n][0]=unicode(self.ui.slide_title.text())
         self.slides[n][1]=unicode(self.ui.slide_text.toPlainText())

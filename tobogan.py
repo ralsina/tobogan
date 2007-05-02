@@ -64,6 +64,10 @@ class MainWindow(QtGui.QMainWindow):
             QtCore.SIGNAL("triggered()"),
             self.moveSlideDown)
 
+        QtCore.QObject.connect(self.ui.actionNewSlide,
+            QtCore.SIGNAL("triggered()"),
+            self.newSlide)
+
         QtCore.QObject.connect(self.ui.slide_list,
             QtCore.SIGNAL("currentItemChanged ( QListWidgetItem *, QListWidgetItem *)"),
             self.switchSlide)
@@ -77,7 +81,36 @@ class MainWindow(QtGui.QMainWindow):
         self.setTitle()
         if fname:
             self.openFile(fname)
-        
+        else:
+            self.data='''\
+==========
+Title Here
+==========
+
+Subtitle Here
+=============
+
+:Author: Unknown
+:transitions: from_bottom,to_bottom
+
+
+Slide 1
+-------
+
+* Text of the slide
+
+        '''
+            self.tree=docutils.core.publish_doctree(self.data)
+            self.processDocument()
+
+
+    def newSlide(self):
+        self.slides.append(['slide_%d'%(len(self.slides)+1),''])
+        self.transitions.append('from_bottom')
+        self.transitions.append('to_bottom')
+        self.updateSlideList()
+
+    
     def setTitle(self):
         self.setWindowTitle('Tobogan - %s'%self.fn)
         
@@ -200,8 +233,13 @@ class MainWindow(QtGui.QMainWindow):
         for slide in self.slides[1:]:
             self.data=self.data+'\n'+self.slideToText(slide)
             
-        self.data+='\n\n.. header:: %s\n\n.. footer:: %s\n\n'%(unicode(self.ui.header.text()),
-                                                                unicode(self.ui.footer.text()))
+        htext=unicode(self.ui.header.text())
+        ftext=unicode(self.ui.footer.text())
+        
+        if htext:
+            self.data+='\n\n.. header:: %s\n'%htext
+        if ftext:
+            self.data+='\n\n.. footer:: %s\n'%ftext
         
     def saveFileAs(self):
         fn=str(QtGui.QFileDialog.getSaveFileName (self))
@@ -296,7 +334,10 @@ class MainWindow(QtGui.QMainWindow):
         
 def main():
     app=QtGui.QApplication(sys.argv)
-    window=MainWindow(sys.argv[1])
+    if len(sys.argv)>1:
+        window=MainWindow(sys.argv[1])
+    else:
+        window=MainWindow()
     window.show()
     sys.exit(app.exec_())
 

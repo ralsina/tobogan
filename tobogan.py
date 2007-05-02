@@ -105,7 +105,7 @@ Slide 1
 
 
     def newSlide(self):
-        self.slides.append(['Slide %d'%(len(self.slides)),''])
+        self.slides.append(['Slide %d'%(len(self.slides)),'Text of the slide'])
         self.transitions.append('from_bottom')
         self.transitions.append('to_bottom')
         self.updateSlideList()
@@ -118,9 +118,19 @@ Slide 1
         # Create a temporary folder
         dn=tempfile.mkdtemp()
         fn=os.path.join(dn,self.fn+'.html')
-        self.exportHTML(fn)
+        self.exportAllFiles(dn)
         QtGui.QDesktopServices.openUrl(QtCore.QUrl(fn))
 
+    def exportAllFiles(self,dname):
+        fn=os.path.join(dname,self.fn+'.html')
+        self.exportHTML(fn)
+        for f in ['mootools.js','code.css','murphy.css','slides.css']:
+            fn1=os.path.join('resources',f)
+            fn2=os.path.join(dname,f)
+            open(fn2,'w').write(open(fn1,'r').read())
+        
+    
+        
     def moveSlideUp(self):
         r=self.ui.slide_list.currentRow()
         if r<2:
@@ -229,9 +239,8 @@ Slide 1
         self.data+='\n:transitions: '+','.join(self.transitions)+'\n'
         self.data+=unicode(self.ui.docinfo.toPlainText())
         
-    
         for slide in self.slides[1:]:
-            self.data=self.data+'\n'+self.slideToText(slide)
+            self.data=self.data+'\n'+self.slideToText(slide)+'\n'
             
         htext=unicode(self.ui.header.text())
         ftext=unicode(self.ui.footer.text())
@@ -264,7 +273,7 @@ Slide 1
                 
     def processDocument(self):    
         self.nodes={}
-        self.slides=[['Cover Slide','You can\'tedit this in this version']]
+        self.slides=[['Cover Slide','You can\'t edit this in this version']]
         self.transitions=[]
 
         for node in self.tree.children:

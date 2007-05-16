@@ -122,7 +122,6 @@ Slide 1
         self.updateSlideList()
         self.openSlide(c-1)
             
-    
     def setTitle(self):
         self.setWindowTitle('Tobogan - %s'%self.fn)
         
@@ -140,8 +139,6 @@ Slide 1
             fn1=os.path.join('resources',f)
             fn2=os.path.join(dname,f)
             open(fn2,'w').write(open(fn1,'r').read())
-        
-    
         
     def moveSlideUp(self):
         r=self.ui.slide_list.currentRow()

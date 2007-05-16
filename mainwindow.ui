@@ -288,7 +288,7 @@
      <x>0</x>
      <y>0</y>
      <width>694</width>
-     <height>31</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSlide" >
@@ -338,8 +338,8 @@
    </widget>
    <addaction name="menu_File" />
    <addaction name="menu_Edit" />
-   <addaction name="menuHelp" />
    <addaction name="menuSlide" />
+   <addaction name="menuHelp" />
   </widget>
   <widget class="QStatusBar" name="statusbar" />
   <widget class="QToolBar" name="toolBar" >
@@ -367,7 +367,7 @@
   </widget>
   <action name="action_Open" >
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/fileopen.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/fileopen.svg</iconset>
    </property>
    <property name="text" >
     <string>&amp;Open</string>
@@ -378,7 +378,7 @@
   </action>
   <action name="action_Save" >
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/filesave.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/filesave.svg</iconset>
    </property>
    <property name="text" >
     <string>&amp;Save</string>
@@ -386,7 +386,7 @@
   </action>
   <action name="actionSave_as" >
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/filesaveas.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/filesaveas.svg</iconset>
    </property>
    <property name="text" >
     <string>Save &amp;as</string>
@@ -394,7 +394,7 @@
   </action>
   <action name="action_Quit" >
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/fileclose.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/exit.svg</iconset>
    </property>
    <property name="text" >
     <string>&amp;Quit</string>
@@ -402,7 +402,7 @@
   </action>
   <action name="actionUndo" >
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/undo.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/undo.svg</iconset>
    </property>
    <property name="text" >
     <string>Undo</string>
@@ -413,7 +413,7 @@
   </action>
   <action name="actionRedo" >
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/redo.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/redo.svg</iconset>
    </property>
    <property name="text" >
     <string>Redo</string>
@@ -424,7 +424,7 @@
   </action>
   <action name="actionCut" >
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/editcut.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/editcut.svg</iconset>
    </property>
    <property name="text" >
     <string>Cut</string>
@@ -435,7 +435,7 @@
   </action>
   <action name="actionCopy" >
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/editcopy.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/editcopy.svg</iconset>
    </property>
    <property name="text" >
     <string>Copy</string>
@@ -446,7 +446,7 @@
   </action>
   <action name="actionPaste" >
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/editpaste.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/editpaste.svg</iconset>
    </property>
    <property name="text" >
     <string>Paste</string>
@@ -466,6 +466,9 @@
    </property>
   </action>
   <action name="action_Contents" >
+   <property name="icon" >
+    <iconset resource="icons.qrc" >:/icons/icons/help.svg</iconset>
+   </property>
    <property name="text" >
     <string>&amp;Contents</string>
    </property>
@@ -480,7 +483,7 @@
   </action>
   <action name="actionNew" >
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/filenew.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/filenew.svg</iconset>
    </property>
    <property name="text" >
     <string>New</string>
@@ -488,7 +491,7 @@
   </action>
   <action name="actionPreview" >
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/xeyes.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/preview.svg</iconset>
    </property>
    <property name="text" >
     <string>Preview</string>
@@ -496,7 +499,7 @@
   </action>
   <action name="actionExport_HTML" >
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/webexport.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/webexport.svg</iconset>
    </property>
    <property name="text" >
     <string>Export HTML</string>
@@ -504,7 +507,7 @@
   </action>
   <action name="actionNewSlide" >
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/newslide.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/newslide.svg</iconset>
    </property>
    <property name="text" >
     <string>New Slide</string>
@@ -512,7 +515,7 @@
   </action>
   <action name="actionDelete_Slide" >
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/delslide.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/delslide.svg</iconset>
    </property>
    <property name="text" >
     <string>Delete Slide</string>
@@ -523,7 +526,7 @@
     <bool>false</bool>
    </property>
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/1uparrow.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/1uparrow.svg</iconset>
    </property>
    <property name="text" >
     <string>Move Up</string>
@@ -534,7 +537,7 @@
     <bool>false</bool>
    </property>
    <property name="icon" >
-    <iconset resource="icons.qrc" >:/icons/icons/1downarrow.png</iconset>
+    <iconset resource="icons.qrc" >:/icons/icons/1downarrow.svg</iconset>
    </property>
    <property name="text" >
     <string>Move Down</string>

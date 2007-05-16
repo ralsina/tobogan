@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/mnt/centos/home/ralsina/Desktop/proyectos/tobogan/tobogan/mainwindow.ui'
+# Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Tue Apr 17 14:59:16 2007
-#      by: PyQt4 UI code generator 4.1.1
+# Created: Tue May 15 23:59:12 2007
+#      by: PyQt4 UI code generator 4.2
 #
 # WARNING! All changes made in this file will be lost!
 
-import sys
 from PyQt4 import QtCore, QtGui
 
 class Ui_MainWindow(object):
@@ -159,7 +158,7 @@ class Ui_MainWindow(object):
         self.slide_text.setSizePolicy(sizePolicy)
         self.slide_text.setBaseSize(QtCore.QSize(450,0))
 
-        font = QtGui.QFont(self.slide_text.font())
+        font = QtGui.QFont()
         font.setFamily("Bitstream Vera Sans Mono")
         self.slide_text.setFont(font)
         self.slide_text.setObjectName("slide_text")
@@ -170,7 +169,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0,0,694,31))
+        self.menubar.setGeometry(QtCore.QRect(0,0,694,29))
         self.menubar.setObjectName("menubar")
 
         self.menuSlide = QtGui.QMenu(self.menubar)
@@ -196,39 +195,39 @@ class Ui_MainWindow(object):
         MainWindow.addToolBar(self.toolBar)
 
         self.action_Open = QtGui.QAction(MainWindow)
-        self.action_Open.setIcon(QtGui.QIcon(":/icons/icons/fileopen.png"))
+        self.action_Open.setIcon(QtGui.QIcon(":/icons/icons/fileopen.svg"))
         self.action_Open.setObjectName("action_Open")
 
         self.action_Save = QtGui.QAction(MainWindow)
-        self.action_Save.setIcon(QtGui.QIcon(":/icons/icons/filesave.png"))
+        self.action_Save.setIcon(QtGui.QIcon(":/icons/icons/filesave.svg"))
         self.action_Save.setObjectName("action_Save")
 
         self.actionSave_as = QtGui.QAction(MainWindow)
-        self.actionSave_as.setIcon(QtGui.QIcon(":/icons/icons/filesaveas.png"))
+        self.actionSave_as.setIcon(QtGui.QIcon(":/icons/icons/filesaveas.svg"))
         self.actionSave_as.setObjectName("actionSave_as")
 
         self.action_Quit = QtGui.QAction(MainWindow)
-        self.action_Quit.setIcon(QtGui.QIcon(":/icons/icons/fileclose.png"))
+        self.action_Quit.setIcon(QtGui.QIcon(":/icons/exit.svg"))
         self.action_Quit.setObjectName("action_Quit")
 
         self.actionUndo = QtGui.QAction(MainWindow)
-        self.actionUndo.setIcon(QtGui.QIcon(":/icons/icons/undo.png"))
+        self.actionUndo.setIcon(QtGui.QIcon(":/icons/icons/undo.svg"))
         self.actionUndo.setObjectName("actionUndo")
 
         self.actionRedo = QtGui.QAction(MainWindow)
-        self.actionRedo.setIcon(QtGui.QIcon(":/icons/icons/redo.png"))
+        self.actionRedo.setIcon(QtGui.QIcon(":/icons/icons/redo.svg"))
         self.actionRedo.setObjectName("actionRedo")
 
         self.actionCut = QtGui.QAction(MainWindow)
-        self.actionCut.setIcon(QtGui.QIcon(":/icons/icons/editcut.png"))
+        self.actionCut.setIcon(QtGui.QIcon(":/icons/icons/editcut.svg"))
         self.actionCut.setObjectName("actionCut")
 
         self.actionCopy = QtGui.QAction(MainWindow)
-        self.actionCopy.setIcon(QtGui.QIcon(":/icons/icons/editcopy.png"))
+        self.actionCopy.setIcon(QtGui.QIcon(":/icons/icons/editcopy.svg"))
         self.actionCopy.setObjectName("actionCopy")
 
         self.actionPaste = QtGui.QAction(MainWindow)
-        self.actionPaste.setIcon(QtGui.QIcon(":/icons/icons/editpaste.png"))
+        self.actionPaste.setIcon(QtGui.QIcon(":/icons/icons/editpaste.svg"))
         self.actionPaste.setObjectName("actionPaste")
 
         self.actionDelete = QtGui.QAction(MainWindow)
@@ -238,39 +237,40 @@ class Ui_MainWindow(object):
         self.actionSelect_All.setObjectName("actionSelect_All")
 
         self.action_Contents = QtGui.QAction(MainWindow)
+        self.action_Contents.setIcon(QtGui.QIcon(":/icons/icons/help.svg"))
         self.action_Contents.setObjectName("action_Contents")
 
         self.actionAbout_Tobogan = QtGui.QAction(MainWindow)
         self.actionAbout_Tobogan.setObjectName("actionAbout_Tobogan")
 
         self.actionNew = QtGui.QAction(MainWindow)
-        self.actionNew.setIcon(QtGui.QIcon(":/icons/icons/filenew.png"))
+        self.actionNew.setIcon(QtGui.QIcon(":/icons/icons/filenew.svg"))
         self.actionNew.setObjectName("actionNew")
 
         self.actionPreview = QtGui.QAction(MainWindow)
-        self.actionPreview.setIcon(QtGui.QIcon(":/icons/icons/xeyes.png"))
+        self.actionPreview.setIcon(QtGui.QIcon(":/icons/icons/preview.svg"))
         self.actionPreview.setObjectName("actionPreview")
 
         self.actionExport_HTML = QtGui.QAction(MainWindow)
-        self.actionExport_HTML.setIcon(QtGui.QIcon(":/icons/icons/webexport.png"))
+        self.actionExport_HTML.setIcon(QtGui.QIcon(":/icons/icons/webexport.svg"))
         self.actionExport_HTML.setObjectName("actionExport_HTML")
 
         self.actionNewSlide = QtGui.QAction(MainWindow)
-        self.actionNewSlide.setIcon(QtGui.QIcon(":/icons/icons/newslide.png"))
+        self.actionNewSlide.setIcon(QtGui.QIcon(":/icons/icons/newslide.svg"))
         self.actionNewSlide.setObjectName("actionNewSlide")
 
         self.actionDelete_Slide = QtGui.QAction(MainWindow)
-        self.actionDelete_Slide.setIcon(QtGui.QIcon(":/icons/icons/delslide.png"))
+        self.actionDelete_Slide.setIcon(QtGui.QIcon(":/icons/icons/delslide.svg"))
         self.actionDelete_Slide.setObjectName("actionDelete_Slide")
 
         self.actionMove_Up = QtGui.QAction(MainWindow)
         self.actionMove_Up.setEnabled(False)
-        self.actionMove_Up.setIcon(QtGui.QIcon(":/icons/icons/1uparrow.png"))
+        self.actionMove_Up.setIcon(QtGui.QIcon(":/icons/icons/1uparrow.svg"))
         self.actionMove_Up.setObjectName("actionMove_Up")
 
         self.actionMove_Down = QtGui.QAction(MainWindow)
         self.actionMove_Down.setEnabled(False)
-        self.actionMove_Down.setIcon(QtGui.QIcon(":/icons/icons/1downarrow.png"))
+        self.actionMove_Down.setIcon(QtGui.QIcon(":/icons/icons/1downarrow.svg"))
         self.actionMove_Down.setObjectName("actionMove_Down")
         self.menuSlide.addAction(self.actionNewSlide)
         self.menuSlide.addAction(self.actionDelete_Slide)
@@ -299,8 +299,8 @@ class Ui_MainWindow(object):
         self.menu_File.addAction(self.action_Quit)
         self.menubar.addAction(self.menu_File.menuAction())
         self.menubar.addAction(self.menu_Edit.menuAction())
-        self.menubar.addAction(self.menuHelp.menuAction())
         self.menubar.addAction(self.menuSlide.menuAction())
+        self.menubar.addAction(self.menuHelp.menuAction())
         self.toolBar.addAction(self.action_Open)
         self.toolBar.addAction(self.action_Save)
         self.toolBar.addAction(self.actionExport_HTML)
@@ -376,12 +376,3 @@ class Ui_MainWindow(object):
         self.actionMove_Down.setText(QtGui.QApplication.translate("MainWindow", "Move Down", None, QtGui.QApplication.UnicodeUTF8))
 
 import icons_rc
-
-
-if __name__ == "__main__":
-    app = QtGui.QApplication(sys.argv)
-    MainWindow = QtGui.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
